@@ -1,0 +1,24 @@
+{
+  "name": "yollivertattoo",
+  "version": "1.0.0",
+  "description": "Estoque da loja Yolliver Tattoo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Acentore/yollivertattoo.git"
+  },
+  "author": "Fernando Guerreiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Acentore/yollivertattoo/issues"
+  },
+  "homepage": "https://github.com/Acentore/yollivertattoo#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13"
+  }
+}
