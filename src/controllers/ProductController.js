@@ -2,7 +2,17 @@ const connection = require("../database/connection");
 
 module.exports = {
   async index(req, res) {
-    const products = await connection("product").select("*");
+    const { page = 1 } = req.query
+
+    const [count] = await connection("product").count()
+    console.log(count);
+
+    const products = await connection("product")
+      .limit(5)
+      .offset((page - 1) * 5)
+      .select("*");
+
+    res.header('X-Total-Count', count['count(*)'])
 
     return res.json(products);
   },
