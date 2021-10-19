@@ -24,7 +24,6 @@ module.exports = {
       .then((userCredential) => {
         const user = userCredential.user;
         res.send({ status: 200, msg: "Login success"})
-        console.log(user.providerData);
       })
       .catch((error) => {
         res.send({ status: 400, msg: error.message})
