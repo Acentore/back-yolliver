@@ -5,21 +5,21 @@ module.exports = {
   async index(req, res) {
     const snapshot = await product.get();
     const products = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    res.send(products);
+    res.json(products);
   },
   async create(req, res) {
     const data = req.body
     await product.add(data)
-    res.send({ status: 200, msg: "product created" })
+    res.json({ status: 200, msg: "product created" })
   },
   async update(req, res) {
     const { id, ...data } = req.body
     await product.doc(id).update(data)
-    res.send({ status: 200, msg: "product updated" })
+    res.json({ status: 200, msg: "product updated" })
   },
   async delete(req, res) {
     const { id } = req.body
     await product.doc(id).delete()
-    res.send({ msg: "product deleted" })
+    res.json({ msg: "product deleted" })
   }
 };

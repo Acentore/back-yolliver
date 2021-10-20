@@ -20,7 +20,7 @@ module.exports = {
       id: doc.id,
       ...doc.data()
     }));
-    res.send(sales);
+    res.json(sales);
   },
   async create(req, res) {
     const { buyer, products } = req.body
@@ -36,11 +36,11 @@ module.exports = {
         })
       }).catch(err => console.log(err))
 
-    res.send({ status: 200, msg: "sale created" })
+    res.json({ status: 200, msg: "sale created" })
   },
   async delete(req, res) {
     const {id } = req.body
     await sale.doc(id).delete()
-    res.send({ msg: "sale deleted" })
+    res.json({ msg: "sale deleted" })
   }
 };
