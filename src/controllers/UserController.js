@@ -1,5 +1,6 @@
 const { db, firebase } = require('../database/config')
 const user = db.collection("users");
+const { v4: uuid } = require('uuid')
 
 module.exports = {
   async index(req, res) {
@@ -10,12 +11,12 @@ module.exports = {
   async create(req, res) {
     const { email, password, ...data } = req.body
     await firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        user.add({ email: email, ...data })
-        res.json({ status: 200, msg: "user created"})
+      .then(() => {
+        user.doc(email).set({ id: uuid(), ...data });
+        res.json({ status: 200, msg: "user created" })
       })
       .catch((error) => {
-        res.json({ status: 400, msg: error.message})
+        res.json({ status: 400, msg: error.message })
       })
   },
   async login(req, res) {
@@ -23,10 +24,10 @@ module.exports = {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        res.json({ status: 200, msg: "Login success"})
+        res.json({ status: 200, msg: "Login success" })
       })
       .catch((error) => {
-        res.json({ status: 400, msg: error.message})
+        res.json({ status: 400, msg: error.message })
       });
   },
   async update(req, res) {
